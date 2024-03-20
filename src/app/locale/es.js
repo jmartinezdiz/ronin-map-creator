@@ -38,6 +38,7 @@ let translations = {
       gridTextFont: "Tipografía de texto",
       gridTextColor: "Color de texto",
       logoOpacity: "Opacidad del logo",
+      logoBorderRadius: "Porcentage de redondez del logo",
     },
     invalid: {
       gridXSize: "Debe ser un número entero mayor que cero",
@@ -50,6 +51,7 @@ let translations = {
       gridTextFont: "Debe estar en el conjunto",
       gridTextColor: "Debe estar en el conjunto",
       logoOpacity: "Debe ser un número entero mayor que cero",
+      logoBorderRadius: "Debe ser un número entero mayor que cero",
     },
     availableValues: {
       gridLineColor: {

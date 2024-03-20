@@ -64,6 +64,7 @@ function MapCreatorConfigForm(props) {
         <Container fluid>
           <Row>
             <MapCreatorConfigFormInput config={config} name="logoOpacity" onChange={onChangeOption} />
+            <MapCreatorConfigFormInput config={config} name="logoBorderRadius" onChange={onChangeOption} />
           </Row>
         </Container>
       </Tab>

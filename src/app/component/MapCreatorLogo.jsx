@@ -14,7 +14,7 @@ function MapCreatorLogo(props) {
   const { config } = props;
 
   // Constants
-  const { logoOpacity } = config;
+  const { logoOpacity, logoBorderRadius } = config;
   const containerStyle = {
     position: "absolute",
     top: "20px",
@@ -25,7 +25,7 @@ function MapCreatorLogo(props) {
     width: "80%",
     height: "80%",
     float: "right",
-    borderRadius: "50%",
+    borderRadius: `${logoBorderRadius}%`,
   };
 
   // Render

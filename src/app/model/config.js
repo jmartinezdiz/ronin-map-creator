@@ -31,6 +31,7 @@ const OPTIONS = {
   gridTextFont: Option.newString({ default: "BlackOpsOne-Regular", availableValues: AVAILABLE_FONTS }),
   gridTextColor: Option.newString({ default: "white", availableValues: AVAILABLE_COLORS }),
   logoOpacity: Option.newInteger({ default: 90, validators: [greaterThanZero] }),
+  logoBorderRadius: Option.newInteger({ default: 50, validators: [greaterThanZero] }),
 };
 
 ///////////////////////////////////////////////////////////////
