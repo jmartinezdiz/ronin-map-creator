@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'armalite';
+  src: url('/font/armalite.ttf');
+}
+
+@font-face {
+  font-family: 'BlackOpsOne-Regular';
+  src: url('/font/BlackOpsOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'CamouflageD';
+  src: url('/font/CamouflageD.ttf');
+}
+
+@font-face {
+  font-family: 'CamouflageW';
+  src: url('/font/CamouflageW.ttf');
+}
+
+@font-face {
+  font-family: 'octin-vintage-b-rg';
+  src: url('/font/octin-vintage-b-rg.otf') format("opentype");
+}
+
+@font-face {
+  font-family: 'sector-017';
+  src: url('/font/sector-017.ttf');
+}
+
+table.map-creator-grid {
+  border-spacing: 0;
+  border-collapse: collapse;
+  font-weight: bold;
+  text-align: center;
+  table-layout: fixed;
+  width: 100%;
+}
+
+table.map-creator-grid th, table.map-creator-grid td {
+  overflow: hidden;
+  box-sizing: content-box;
+}
