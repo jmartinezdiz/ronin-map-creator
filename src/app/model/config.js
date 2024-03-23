@@ -15,6 +15,7 @@ const AVAILABLE_FONTS = [
   'octin-vintage-b-rg',
   'sector-017',
 ];
+const AVAILABLE_LAYERS = ["satellite", "street"];
 
 const greaterThanZero = function(value) {
   return value && value > 0;
@@ -32,6 +33,9 @@ const OPTIONS = {
   gridTextColor: Option.newString({ default: "white", availableValues: AVAILABLE_COLORS }),
   logoOpacity: Option.newInteger({ default: 90, validators: [greaterThanZero] }),
   logoBorderRadius: Option.newInteger({ default: 50, validators: [greaterThanZero] }),
+  mapWidth: Option.newInteger({ default: 1280, validators: [greaterThanZero] }),
+  mapHeight: Option.newInteger({ default: 720, validators: [greaterThanZero] }),
+  mapLayer: Option.newString({ default: "satellite", availableValues: AVAILABLE_LAYERS }),
 };
 
 ///////////////////////////////////////////////////////////////

@@ -20,7 +20,7 @@ import MapCreatorConfigFormInput from "./MapCreatorConfigFormInput";
 function MapCreatorConfigForm(props) {
 
   // Props
-  const { config, onChange } = props;
+  const { config, createFromMap, onChange } = props;
 
   // Variables
   const { t } = useTranslation();
@@ -32,7 +32,18 @@ function MapCreatorConfigForm(props) {
 
   // Render
   return (
-    <Tabs defaultActiveKey="grid" className="mb-3" >
+    <Tabs defaultActiveKey={createFromMap ? "map" : "grid"} className="mb-3" >
+      {createFromMap &&
+        <Tab eventKey="map" title={t("mapCreatorConfigForm.map")}>
+        <Container fluid>
+          <Row>
+            <MapCreatorConfigFormInput config={config} name="mapWidth" onChange={onChangeOption} />
+            <MapCreatorConfigFormInput config={config} name="mapHeight" onChange={onChangeOption} />
+            <MapCreatorConfigFormInput config={config} name="mapLayer" onChange={onChangeOption} />
+          </Row>
+        </Container>
+      </Tab>
+      }
       <Tab eventKey="grid" title={t("mapCreatorConfigForm.grid")}>
         <Container fluid>
           <Row>

@@ -6,18 +6,26 @@ let translations = {
     download: "Descargar",
   },
   app: {
-    step1: "PASO 1:",
-    step1Text: "Indicar la imagen del mapa",
-    step2: "PASO 2:",
-    step2Text: "Configurar la cuadrícula",
-    step3: "PASO 3:",
-    step3Text: "Descargar mapa",
+    step: "PASO {{number}}:",
+    stepSelectOrigin: "Indicar si crear el mapa seleccionando una ubicación en un mapa o desde una imagen",
+    stepSelectImage: "Indicar la imagen del mapa",
+    stepConfigure: "Configurar la cuadrícula",
+    stepDownload: "Descargar mapa",
+    originTypes: {
+      fromMap: "Seleccionar en mapa",
+      fromImage: "Crear desde una imagen",
+    },
   },
   mapImageForm: {
     inputLabel: "Seleccionar mapa",
     inputInvalid: "Debe indicarse una imagen con extensión: {{extensions}}."
   },
+  mapCreatorFromMap: {
+    searchLabel: "Buscar ubicación",
+    searchPlaceholder: "Escribe y presiona intro",
+  },
   mapCreatorConfigForm: {
+    map: "Mapa",
     grid: "Cuadrícula",
     lines: "Líneas",
     text: "Texto",
@@ -39,6 +47,9 @@ let translations = {
       gridTextColor: "Color de texto",
       logoOpacity: "Opacidad del logo",
       logoBorderRadius: "Porcentage de redondez del logo",
+      mapWidth: "Ancho del mapa (píxeles)",
+      mapHeight: "Alto del mapa (píxeles)",
+      mapLayer: "Tipo de mapa",
     },
     invalid: {
       gridXSize: "Debe ser un número entero mayor que cero",
@@ -52,6 +63,9 @@ let translations = {
       gridTextColor: "Debe estar en el conjunto",
       logoOpacity: "Debe ser un número entero mayor que cero",
       logoBorderRadius: "Debe ser un número entero mayor que cero",
+      mapWidth: "Debe ser un número entero mayor que cero",
+      mapHeight: "Debe ser un número entero mayor que cero",
+      mapLayer: "Debe estar en el conjunto",
     },
     availableValues: {
       gridLineColor: {
@@ -75,6 +89,10 @@ let translations = {
         blue: "Azul",
         black: "Negro",
         white: "Blanco",
+      },
+      mapLayer: {
+        street: "Callejero",
+        satellite: "Satélite",
       },
     },
   }

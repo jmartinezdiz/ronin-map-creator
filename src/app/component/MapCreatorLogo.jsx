@@ -19,6 +19,7 @@ function MapCreatorLogo(props) {
     position: "absolute",
     top: "20px",
     right: "20px",
+    zIndex: 1000,
   };
   const imageStyle = {
     opacity: `${logoOpacity}%`,

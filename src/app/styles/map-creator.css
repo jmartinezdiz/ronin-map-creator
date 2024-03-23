@@ -35,9 +35,25 @@ table.map-creator-grid {
   text-align: center;
   table-layout: fixed;
   width: 100%;
+  position: absolute;
+  top: 0px;
+  pointer-events: none;
 }
 
 table.map-creator-grid th, table.map-creator-grid td {
   overflow: hidden;
   box-sizing: content-box;
+}
+
+.map-creator-map-creator-controls .ol-geocoder.gcd-txt-container {
+  left: initial;
+  position: initial;
+  top: initial;
+  height: initial;
+}
+
+.map-creator-map-creator-controls .ol-geocoder ul.gcd-txt-result {
+  left: initial;
+  position: initial;
+  top: initial;
 }

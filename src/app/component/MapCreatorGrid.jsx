@@ -29,6 +29,7 @@ function MapCreatorGrid(props) {
       fontSize: `${gridTextSize}px`,
       fontFamily: gridTextFont,
       color: gridTextColor,
+      zIndex: 999,
     }
   };
 

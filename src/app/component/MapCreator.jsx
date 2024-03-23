@@ -9,8 +9,8 @@ import { useState, useRef, useEffect } from 'react';
 import Config from '../model/config';
 
 // COMPONENTS
-import MapCreatorGrid from './MapCreatorGrid';
-import MapCreatorLogo from './MapCreatorLogo';
+import MapCreatorFromImage from './MapCreatorFromImage';
+import MapCreatorFromMap from './MapCreatorFromMap';
 import MapCreatorConfigForm from './MapCreatorConfigForm';
 
 ///////////////////////////////////////////////////////////////
@@ -24,34 +24,10 @@ import '../styles/map-creator.css';
 function MapCreator(props) {
 
   // Props
-  const { mapImage, onLoad } = props;
+  const { mapImage, createFromMap, createFromImage, onLoad } = props;
 
   // State
-
   const [config, setConfig] = useState(new Config());
-
-  // References
-  const containerRef = useRef(null);
-
-  // Callbacks
-  useEffect(() => {
-    onLoad({ mapRef: containerRef });
-    return () => {
-      onLoad({ mapRef: null })
-    };
-  }, []);
-
-  // Constants
-  const { width, height } = mapImage;
-  const containerStyle = {
-    width: `${width}px`,
-    height: `${height}px`,
-    backgroundImage: `url(${URL.createObjectURL(mapImage.file)})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "100% 100%",
-    overflow: "hidden",
-    position: "relative",
-  };
 
   // Events
   const onChangeConfigForm = function(newConfig) {
@@ -61,11 +37,9 @@ function MapCreator(props) {
   // Render
   return (
     <div style={{ display: "block" }} >
-      <div ref={containerRef} className="mb-3" style={containerStyle}>
-        <MapCreatorGrid width={width} height={height} config={config} />
-        <MapCreatorLogo config={config} />
-      </div>
-      <MapCreatorConfigForm config={config} onChange={onChangeConfigForm} />
+      <MapCreatorConfigForm config={config} createFromMap={createFromMap} createFromImage={createFromImage} onChange={onChangeConfigForm} />
+      {createFromMap && <MapCreatorFromMap mapImage={mapImage} onLoad={onLoad} config={config} />}
+      {createFromImage && <MapCreatorFromImage mapImage={mapImage} onLoad={onLoad} config={config} />}
     </div>
   );
 
