@@ -14,11 +14,11 @@ function MapCreatorLogo(props) {
   const { config } = props;
 
   // Constants
-  const { logoOpacity, logoBorderRadius } = config;
+  const { logoOpacity, logoBorderRadius, logoMarginTop, logoMarginRight } = config;
   const containerStyle = {
     position: "absolute",
-    top: "20px",
-    right: "20px",
+    top: `${logoMarginTop}px`,
+    right: `${logoMarginRight}px`,
     zIndex: 1000,
   };
   const imageStyle = {
