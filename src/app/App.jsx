@@ -28,7 +28,7 @@ function App() {
   // State
   const [originType, setOriginType] = useState(originTypes.fromMap);
   const [mapImage, setMapImage] = useState(null);
-  const [mapToDownloadRef, setMapToDownloadRef] = useState(null);
+  const [mapToDownload, setMapToDownload] = useState(null);
 
   // Variables
   let number = "0";
@@ -43,8 +43,8 @@ function App() {
   const onChangeMapFile = function(image = { file, width, height }) {
     setMapImage(image);
   };
-  const onLoadMapCreator = function({ mapRef: mapRef }) {
-    setMapToDownloadRef(mapRef);
+  const onLoadMapCreator = function({ mapRef, getMapInfo }) {
+    setMapToDownload({ mapRef, getMapInfo });
   };
 
   // Render
@@ -75,9 +75,9 @@ function App() {
           />
         </Block>
       }
-      {mapToDownloadRef &&
+      {mapToDownload &&
         <Block title={t('app.step', { number: number = succ(number) })} subtitle={t('app.stepDownload')}>
-          <MapDownload mapRef={mapToDownloadRef} />
+          <MapDownload mapToDownload={mapToDownload} />
         </Block>
       }
     </>

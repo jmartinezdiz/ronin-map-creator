@@ -15,7 +15,8 @@ import MapCreatorLogo from './MapCreatorLogo';
 function MapCreatorFromImage(props) {
 
   // Props
-  const { mapImage, onLoad, config } = props;
+  const { mapImage, onLoad, mapInfo } = props;
+  const { config } = mapInfo;
 
   // References
   const containerToDownloadRef = useRef(null);

@@ -45,6 +45,10 @@ table.map-creator-grid th, table.map-creator-grid td {
   box-sizing: content-box;
 }
 
+.map-creator-from-map-load-map-info-form {
+  margin-bottom: 15px;
+}
+
 .map-creator-map-creator-controls .ol-geocoder.gcd-txt-container {
   left: initial;
   position: initial;

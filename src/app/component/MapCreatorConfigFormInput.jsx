@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////
 
 // STANTARD
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   InputGroup,
   FloatingLabel,
@@ -26,6 +26,11 @@ function MapCreatorConfigFormInput(props) {
   // State
   const [value, setValue] = useState(config[name]);
   const [invalid, setInvalid] = useState(false);
+
+  // Callbacks
+  useEffect(() => {
+    setValue(config[name]);
+  }, [config[name]]);
 
   // Variables
   const getInvalidMessage = function() {

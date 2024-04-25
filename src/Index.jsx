@@ -7,10 +7,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 // LOCALE
-import './app/locale/i18n.js';
+import './app/locale/i18n';
 
 // COMPONENTS
-import App from './app/App.jsx';
+import App from './app/App';
 
 ///////////////////////////////////////////////////////////////
 // STYLES

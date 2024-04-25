@@ -77,6 +77,14 @@ class Config {
     return OPTIONS[name].parseValue(value);
   }
 
+  toHash() {
+    let hash = {};
+    Object.keys(OPTIONS).forEach((x) => {
+      hash[x] = this[x];
+    });
+    return hash;
+  }
+
 }
 
 ///////////////////////////////////////////////////////////////

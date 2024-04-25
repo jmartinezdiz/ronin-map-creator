@@ -24,6 +24,10 @@ let translations = {
     searchLabel: "Buscar ubicación",
     searchPlaceholder: "Escribe y presiona intro",
   },
+  mapCreatorFromMapLoadMapInfoForm: {
+    buttonText: "Cargar mapa guardado",
+    inputInvalid: "Debe indicarse un fichero de mapa con extensión: {{extensions}}.",
+  },
   mapCreatorConfigForm: {
     map: "Mapa",
     grid: "Cuadrícula",
@@ -32,7 +36,10 @@ let translations = {
     logo: "Logo",
   },
   mapDownload: {
-    name: "mapa",
+    imageName: "mapa",
+    infoName: "mapa",
+    downloadImage: "Descargar imagen",
+    saveInfo: "Guardar mapa",
   },
   config: {
     option: {

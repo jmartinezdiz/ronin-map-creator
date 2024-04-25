@@ -16,6 +16,9 @@ import Geocoder from 'ol-geocoder';
 import MapCreatorGrid from './MapCreatorGrid';
 import MapCreatorLogo from './MapCreatorLogo';
 
+// MODELS
+import MapInfo from '../model/map-info';
+
 ///////////////////////////////////////////////////////////////
 // CONSTANT
 ///////////////////////////////////////////////////////////////
@@ -34,7 +37,8 @@ import 'ol-geocoder/dist/ol-geocoder.min.css';
 function MapCreatorFromMap(props) {
 
   // Props
-  const { onLoad, config } = props;
+  const { onLoad, mapInfo } = props;
+  const { config, mapInfoFromMap } = mapInfo;
 
   // References
   const containerToDownloadRef = useRef(null);
@@ -63,14 +67,29 @@ function MapCreatorFromMap(props) {
     overflow: "hidden",
     position: "relative",
   };
+  const getMapInfo = function() {
+    let view = mapRef.current.getView();
+    return new MapInfo({
+      config,
+      mapInfoFromMap: {
+        center: view.getCenter(),
+        resolution: view.getResolution(),
+        zoom: view.getZoom(),
+        rotation: view.getRotation(),
+      },
+    });
+  };
 
   // Callbacks
   useEffect(() => {
-    onLoad({ mapRef: containerToDownloadRef });
+    onLoad({
+      mapRef: containerToDownloadRef,
+      getMapInfo: getMapInfo,
+    });
     return () => {
       onLoad({ mapRef: null })
     };
-  }, [containerToDownloadRef]);
+  }, [containerToDownloadRef, config]);
   useEffect(() => {
     if (mapContainerRef.current && !mapRef.current) {
       const view = new View({
@@ -100,6 +119,14 @@ function MapCreatorFromMap(props) {
   useEffect(() => {
     mapRef.current.setLayers([layers[mapLayer]])
   }, [mapLayer]);
+  useEffect(() => {
+    let view = mapRef.current.getView();
+    let { center, resolution, rotation, zoom } = mapInfoFromMap || {};
+    if (center != null && center != undefined) view.setCenter(center);
+    if (resolution != null && resolution != undefined) view.setResolution(resolution);
+    if (rotation != null && rotation != undefined) view.setRotation(rotation);
+    if (zoom != null && zoom != undefined) view.setZoom(zoom);
+  }, [mapInfoFromMap]);
 
   // Renders
   return (
