@@ -60,20 +60,11 @@ function MapCreatorFromMap(props) {
         crossOrigin: "Anonymous",
       })
     }),
-    // topographic: new TileLayer({
-    //   source: new XYZ({
-    //     url: TOPOGRAPHIC_LAYER_SOURCE_URL,
-    //     maxZoom: 17,
-    //     crossOrigin: "Anonymous",
-    //   })
-    // }),
     topographic: new TileLayer({
-      source: new TileWMS({
-        url: "https://servicios.idee.es/wms-inspire/mdt?SERVICE=WMS&",
-        params: {
-          'LAYERS': "1",
-          'FORMAT': 'image/jpeg',
-        },
+      source: new XYZ({
+        url: TOPOGRAPHIC_LAYER_SOURCE_URL,
+        maxZoom: 17,
+        crossOrigin: "Anonymous",
       })
     }),
   };
