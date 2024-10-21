@@ -9,6 +9,7 @@ import Map from 'ol/Map';
 import TileLayer from 'ol/layer/Tile';
 import View from 'ol/View';
 import XYZ from 'ol/source/XYZ';
+import TileWMS from 'ol/source/TileWMS';
 import { OSM } from 'ol/source';
 import Geocoder from 'ol-geocoder';
 
@@ -23,6 +24,7 @@ import MapInfo from '../model/map-info';
 // CONSTANT
 ///////////////////////////////////////////////////////////////
 const SATELLITE_LAYER_SOURCE_URL = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+const TOPOGRAPHIC_LAYER_SOURCE_URL = 'https://tms-mapa-raster.ign.es/1.0.0/mapa-raster/{z}/{x}/{-y}.jpeg';
 const DEFAULT_CENTER_COORDINATES = [-971753.4761257102, 5193724.166082324]; // VIGO
 const DEFAULT_ZOOM = 13;
 
@@ -56,6 +58,22 @@ function MapCreatorFromMap(props) {
         url: SATELLITE_LAYER_SOURCE_URL,
         maxZoom: 19,
         crossOrigin: "Anonymous",
+      })
+    }),
+    // topographic: new TileLayer({
+    //   source: new XYZ({
+    //     url: TOPOGRAPHIC_LAYER_SOURCE_URL,
+    //     maxZoom: 17,
+    //     crossOrigin: "Anonymous",
+    //   })
+    // }),
+    topographic: new TileLayer({
+      source: new TileWMS({
+        url: "https://servicios.idee.es/wms-inspire/mdt?SERVICE=WMS&",
+        params: {
+          'LAYERS': "1",
+          'FORMAT': 'image/jpeg',
+        },
       })
     }),
   };

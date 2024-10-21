@@ -15,7 +15,7 @@ const AVAILABLE_FONTS = [
   'octin-vintage-b-rg',
   'sector-017',
 ];
-const AVAILABLE_LAYERS = ["satellite", "street"];
+const AVAILABLE_LAYERS = ["satellite", "street", "topographic"];
 
 const greaterThanZero = function(value) {
   return value && value > 0;

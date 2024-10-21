@@ -104,6 +104,7 @@ let translations = {
       mapLayer: {
         street: "Callejero",
         satellite: "Satélite",
+        topographic: "Topográfico",
       },
     },
   }
