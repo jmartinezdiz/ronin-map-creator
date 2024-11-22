@@ -3,13 +3,15 @@
 ///////////////////////////////////////////////////////////////
 
 // STANDARD
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
+import { ButtonGroup, Button } from "react-bootstrap";
 import Map from 'ol/Map';
 import TileLayer from 'ol/layer/Tile';
+import VectorLayer from 'ol/layer/Vector';
 import View from 'ol/View';
 import XYZ from 'ol/source/XYZ';
-import TileWMS from 'ol/source/TileWMS';
+import VectorSource from 'ol/source/Vector';
 import { OSM } from 'ol/source';
 import Geocoder from 'ol-geocoder';
 
@@ -19,6 +21,9 @@ import MapCreatorLogo from './MapCreatorLogo';
 
 // MODELS
 import MapInfo from '../model/map-info';
+
+// LIB
+import MapMeasureAdder from '../lib/map-measure-adder';
 
 ///////////////////////////////////////////////////////////////
 // CONSTANT
@@ -46,10 +51,12 @@ function MapCreatorFromMap(props) {
   const containerToDownloadRef = useRef(null);
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
+  const mapMeasureAdderRef = useRef(null);
   const geocoderControlRef = useRef(null);
 
   // Constants
   const { t, language } = useTranslation();
+  const measureTypes = { line: 'line', area: 'area' };
   const { mapLayer, mapWidth, mapHeight } = config;
   const layers = {
     street: new TileLayer({ source: new OSM() }),
@@ -68,6 +75,20 @@ function MapCreatorFromMap(props) {
       })
     }),
   };
+  const vectorSource = new VectorSource();
+  const vector = new VectorLayer({
+    source: vectorSource,
+    style: {
+      'fill-color': 'rgba(255, 255, 255, 0.2)',
+      'stroke-color': '#ffcc33',
+      'stroke-width': 2,
+      'circle-radius': 7,
+      'circle-fill-color': '#ffcc33',
+    },
+  });
+
+  // State
+  const [measureType, setMeasureType] = useState(null);
 
   // Variables
   const containerToDownloadStyle = {
@@ -99,6 +120,7 @@ function MapCreatorFromMap(props) {
       onLoad({ mapRef: null })
     };
   }, [containerToDownloadRef, config]);
+
   useEffect(() => {
     if (mapContainerRef.current && !mapRef.current) {
       const view = new View({
@@ -106,7 +128,7 @@ function MapCreatorFromMap(props) {
         zoom: DEFAULT_ZOOM,
       });
       mapRef.current = new Map({
-        layers: [layers[mapLayer]],
+        layers: [layers[mapLayer], vector],
         view: view,
         target: mapContainerRef.current,
         controls: [],
@@ -123,11 +145,14 @@ function MapCreatorFromMap(props) {
         target: geocoderControlRef.current,
       });
       mapRef.current.addControl(geocoderControl);
+      mapMeasureAdderRef.current = new MapMeasureAdder(mapRef.current, vectorSource);
     }
   }, [mapContainerRef, mapRef]);
+
   useEffect(() => {
-    mapRef.current.setLayers([layers[mapLayer]])
+    mapRef.current.setLayers([layers[mapLayer], vector]);
   }, [mapLayer]);
+
   useEffect(() => {
     let view = mapRef.current.getView();
     let { center, resolution, rotation, zoom } = mapInfoFromMap || {};
@@ -137,13 +162,54 @@ function MapCreatorFromMap(props) {
     if (zoom != null && zoom != undefined) view.setZoom(zoom);
   }, [mapInfoFromMap]);
 
+  // Events
+  const onClickMeasureLine = function() {
+    if (measureType != measureTypes.line) {
+      setMeasureType(measureTypes.line);
+      let opts = {
+        tooltipMessage: t('mapCreatorFromMap.measureTooltipText'),
+        tooltipContinueMessage: t('mapCreatorFromMap.measureTooltipContinueLineText'),
+      };
+      mapMeasureAdderRef.current.addMeasureFunctionToMap('LineString', opts);
+    }
+  };
+
+  const onClickMeasureArea = function() {
+    if (measureType != measureTypes.area) {
+      setMeasureType(measureTypes.area);
+      let opts = {
+        tooltipMessage: t('mapCreatorFromMap.measureTooltipText'),
+        tooltipContinueMessage: t('mapCreatorFromMap.measureTooltipContinueAreaText'),
+      };
+      mapMeasureAdderRef.current.addMeasureFunctionToMap('Polygon', opts);
+    }
+  };
+
+  const onClickCleanMeasures = function() {
+    setMeasureType(null);
+    mapMeasureAdderRef.current.clearMeasures();
+  };
+
   // Renders
   return (
     <>
       <div className="map-creator-map-creator-controls">
         <div ref={geocoderControlRef} />
       </div>
-      <div ref={containerToDownloadRef} style={containerToDownloadStyle}>
+      <div className="pt-3 mb-1">
+        <ButtonGroup>
+          <Button variant={measureType == measureTypes.line ? "primary" : "secondary"} onClick={onClickMeasureLine}>
+            {t("mapCreatorFromMap.measureLine")}
+          </Button>
+          <Button variant={measureType == measureTypes.area ? "primary" : "secondary"} onClick={onClickMeasureArea}>
+            {t("mapCreatorFromMap.measureArea")}
+          </Button>
+          <Button variant="danger" onClick={onClickCleanMeasures}>
+            {t("mapCreatorFromMap.cleanMeasures")}
+          </Button>
+        </ButtonGroup>
+      </div>
+      <div className="map-creator-map-creator-map-container" ref={containerToDownloadRef} style={containerToDownloadStyle}>
         <MapCreatorGrid width={mapWidth} height={mapHeight} config={config} />
         <MapCreatorLogo config={config} />
         <div ref={mapContainerRef} style={{width: `${mapWidth}px`, height: `${mapHeight}px` }} />

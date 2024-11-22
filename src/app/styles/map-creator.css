@@ -61,3 +61,45 @@ table.map-creator-grid th, table.map-creator-grid td {
   position: initial;
   top: initial;
 }
+
+.map-creator-map-creator-map-container .ol-tooltip {
+  position: relative;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  color: white;
+  padding: 4px 8px;
+  opacity: 0.8;
+  white-space: nowrap;
+  font-size: 12px;
+  cursor: default;
+  user-select: none;
+}
+
+.map-creator-map-creator-map-container .ol-tooltip-measure {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.map-creator-map-creator-map-container .ol-tooltip-static {
+  background-color: #ffcc33;
+  opacity: 0.8;
+  color: black;
+  font-weight: bold;
+  border: 1px solid white;
+}
+
+.map-creator-map-creator-map-container .ol-tooltip-measure:before,
+.map-creator-map-creator-map-container .ol-tooltip-static:before {
+  border-top: 6px solid rgba(0, 0, 0, 0.5);
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  margin-left: -7px;
+  left: 50%;
+}
+
+.map-creator-map-creator-map-container .ol-tooltip-static:before {
+  border-top-color: #ffcc33;
+}

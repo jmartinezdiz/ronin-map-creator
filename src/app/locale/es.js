@@ -23,6 +23,12 @@ let translations = {
   mapCreatorFromMap: {
     searchLabel: "Buscar ubicación",
     searchPlaceholder: "Escribe y presiona intro",
+    measureLine: "Medir distancia",
+    measureArea: "Medir área",
+    cleanMeasures: "Eliminar medidas",
+    measureTooltipText: "Haga click para empezar a dibujar",
+    measureTooltipContinueLineText: "Haga click para continuar calculando la distancia.<br>Cuando quiera finalizar haga doble click.",
+    measureTooltipContinueAreaText: "Haga click para continuar calculando el área.<br>Cuando quiera finalizar haga doble click.",
   },
   mapCreatorFromMapLoadMapInfoForm: {
     buttonText: "Cargar mapa guardado",
