@@ -3,6 +3,7 @@
 ///////////////////////////////////////////////////////////////
 
 // STANTARD
+import React from 'react';
 import {
   Tabs,
   Tab,
@@ -35,31 +36,52 @@ function MapCreatorConfigForm(props) {
     onChange({ ...config, [name]: value });
   };
 
-  const onClickMapWidthNotice = function(e) {
+  const onClickMapWidthA4HorizontalNotice = function(e) {
+    e.preventDefault();
+    if (config.mapWidth) {
+      onChangeOption("mapHeight", Math.floor((config.mapWidth * A4_RATIO) / 2));
+    }
+  };
+
+  const onClickMapWidthA4VerticalNotice = function(e) {
     e.preventDefault();
     if (config.mapWidth) {
       onChangeOption("mapHeight", Math.floor(config.mapWidth * A4_RATIO));
     }
   };
 
-  const onClickMapHeightNotice = function(e) {
+  const onClickMapHeightA4HorizontalNotice = function(e) {
+    e.preventDefault();
+    if (config.mapHeight) {
+      onChangeOption("mapWidth", Math.floor(config.mapHeight * A4_RATIO));
+    }
+  };
+
+  const onClickMapHeightA4VerticalNotice = function(e) {
     e.preventDefault();
     if (config.mapHeight) {
       onChangeOption("mapWidth", Math.floor((config.mapHeight * A4_RATIO) / 2));
     }
   };
 
-
   // Render
   const renderMapWidthNotice = function() {
     return (
-      <a href="#" onClick={onClickMapWidthNotice}>{t("mapCreatorConfigForm.adjustA4Height")}</a>
+      <React.Fragment>
+        <a href="#" onClick={onClickMapWidthA4HorizontalNotice}>{t("mapCreatorConfigForm.adjustA4HorizontalHeight")}</a>
+        &nbsp;/&nbsp;
+        <a href="#" onClick={onClickMapWidthA4VerticalNotice}>{t("mapCreatorConfigForm.adjustA4VerticalHeight")}</a>
+      </React.Fragment>
     );
   };
 
   const renderMapHeightNotice = function() {
     return (
-      <a href="#" onClick={onClickMapHeightNotice}>{t("mapCreatorConfigForm.adjustA4Width")}</a>
+      <React.Fragment>
+        <a href="#" onClick={onClickMapHeightA4HorizontalNotice}>{t("mapCreatorConfigForm.adjustA4HorizontalWidth")}</a>
+        &nbsp;/&nbsp;
+        <a href="#" onClick={onClickMapHeightA4VerticalNotice}>{t("mapCreatorConfigForm.adjustA4VerticalWidth")}</a>
+      </React.Fragment>
     );
   };
 
