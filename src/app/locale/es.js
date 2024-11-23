@@ -40,6 +40,8 @@ let translations = {
     lines: "Líneas",
     text: "Texto",
     logo: "Logo",
+    adjustA4Height: "Ajustar alto a A4",
+    adjustA4Width: "Ajustar ancho a A4",
   },
   mapDownload: {
     imageName: "mapa",

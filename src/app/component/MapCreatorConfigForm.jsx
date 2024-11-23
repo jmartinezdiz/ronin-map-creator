@@ -15,6 +15,11 @@ import { useTranslation } from "react-i18next";
 import MapCreatorConfigFormInput from "./MapCreatorConfigFormInput";
 
 ///////////////////////////////////////////////////////////////
+// CONSTANTS
+///////////////////////////////////////////////////////////////
+const A4_RATIO = 1.41451612903;
+
+///////////////////////////////////////////////////////////////
 // COMPONENT
 ///////////////////////////////////////////////////////////////
 function MapCreatorConfigForm(props) {
@@ -30,15 +35,42 @@ function MapCreatorConfigForm(props) {
     onChange({ ...config, [name]: value });
   };
 
+  const onClickMapWidthNotice = function(e) {
+    e.preventDefault();
+    if (config.mapWidth) {
+      onChangeOption("mapHeight", Math.floor(config.mapWidth * A4_RATIO));
+    }
+  };
+
+  const onClickMapHeightNotice = function(e) {
+    e.preventDefault();
+    if (config.mapHeight) {
+      onChangeOption("mapWidth", Math.floor((config.mapHeight * A4_RATIO) / 2));
+    }
+  };
+
+
   // Render
+  const renderMapWidthNotice = function() {
+    return (
+      <a href="#" onClick={onClickMapWidthNotice}>{t("mapCreatorConfigForm.adjustA4Height")}</a>
+    );
+  };
+
+  const renderMapHeightNotice = function() {
+    return (
+      <a href="#" onClick={onClickMapHeightNotice}>{t("mapCreatorConfigForm.adjustA4Width")}</a>
+    );
+  };
+
   return (
     <Tabs defaultActiveKey={createFromMap ? "map" : "grid"} className="mb-3" >
       {createFromMap &&
         <Tab eventKey="map" title={t("mapCreatorConfigForm.map")}>
         <Container fluid>
           <Row>
-            <MapCreatorConfigFormInput config={config} name="mapWidth" onChange={onChangeOption} />
-            <MapCreatorConfigFormInput config={config} name="mapHeight" onChange={onChangeOption} />
+            <MapCreatorConfigFormInput config={config} name="mapWidth" onChange={onChangeOption} notice={renderMapWidthNotice()} />
+            <MapCreatorConfigFormInput config={config} name="mapHeight" onChange={onChangeOption} notice={renderMapHeightNotice()} />
             <MapCreatorConfigFormInput config={config} name="mapLayer" onChange={onChangeOption} />
           </Row>
         </Container>

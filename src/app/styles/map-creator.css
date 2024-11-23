@@ -28,6 +28,10 @@
   src: url('/font/sector-017.ttf');
 }
 
+body a {
+  text-decoration: initial;
+}
+
 table.map-creator-grid {
   border-spacing: 0;
   border-collapse: collapse;

@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 function MapCreatorConfigFormInput(props) {
 
   // Props
-  const { config, name, onChange } = props;
+  const { config, name, notice, onChange } = props;
 
   // Constants
   const { t } = useTranslation();
@@ -52,6 +52,11 @@ function MapCreatorConfigFormInput(props) {
       throw "Unsuported input type!!!";
     }
   };
+  const getNotice = function() {
+    if (notice) {
+      return <small className="form-text">{notice}</small>;
+    }
+  };
 
   // Events
   const onChangeInput = function(input) {
@@ -71,9 +76,10 @@ function MapCreatorConfigFormInput(props) {
   return (
     <Col>
       <InputGroup hasValidation>
-        <FloatingLabel controlId="floatingInput" label={t(`config.option.${name}`)} className="mb-3">
+        <FloatingLabel controlId={`floatingInput-${name}`} label={t(`config.option.${name}`)} className="mb-3">
           {getFieldInput()}
           <Form.Control.Feedback type="invalid">{getInvalidMessage()}</Form.Control.Feedback>
+          {getNotice()}
         </FloatingLabel>
       </InputGroup>
     </Col>
