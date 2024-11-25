@@ -22,10 +22,10 @@ const greaterThanZero = function(value) {
 };
 
 const OPTIONS = {
-  gridXSize: Option.newInteger({ default: 10, validators: [greaterThanZero] }),
-  gridYSize: Option.newInteger({ default: 18, validators: [greaterThanZero] }),
-  gridXEnumUntil: Option.newInteger({ default: 14, validators: [greaterThanZero] }),
-  gridYEnumUntil: Option.newInteger({ default: 9, validators: [greaterThanZero] }),
+  gridXSize: Option.newInteger({ default: 20, validators: [greaterThanZero] }),
+  gridYSize: Option.newInteger({ default: 20, validators: [greaterThanZero] }),
+  gridXEnumUntil: Option.newInteger({ default: 20, validators: [greaterThanZero] }),
+  gridYEnumUntil: Option.newInteger({ default: 20, validators: [greaterThanZero] }),
   gridLineColor: Option.newString({ default: "white", availableValues: AVAILABLE_COLORS }),
   gridLineSize: Option.newInteger({ default: 1, validators: [greaterThanZero] }),
   gridTextSize: Option.newInteger({ default: 40, validators: [greaterThanZero] }),
@@ -36,7 +36,7 @@ const OPTIONS = {
   logoMarginTop: Option.newInteger({ default: 80, validators: [greaterThanZero] }),
   logoMarginRight: Option.newInteger({ default: 40, validators: [greaterThanZero] }),
   mapWidth: Option.newInteger({ default: 1280, validators: [greaterThanZero] }),
-  mapHeight: Option.newInteger({ default: 720, validators: [greaterThanZero] }),
+  mapHeight: Option.newInteger({ default: 905, validators: [greaterThanZero] }),
   mapLayer: Option.newString({ default: "satellite", availableValues: AVAILABLE_LAYERS }),
 };
 

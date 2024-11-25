@@ -14,12 +14,12 @@ import succ from '../lib/succ';
 function MapCreatorGridHead(props) {
 
   // Props
-  const { width, height, config } = props;
+  const { width, height, size, config } = props;
 
   // Render
   return (
     <thead>
-      <tr>{getCells(width, height, config)}</tr>
+      <tr>{getCells(width, height, size, config)}</tr>
     </thead>
   );
 
@@ -28,19 +28,14 @@ function MapCreatorGridHead(props) {
 ///////////////////////////////////////////////////////////////
 // AUXILIAR METHODS
 ///////////////////////////////////////////////////////////////
-function getCells(width, height, config) {
+function getCells(width, height, size, config) {
 
   // Constants
   const {
-    gridXSize,
     gridYSize,
     gridLineSize,
     gridLineColor
   } = config;
-  const size = Math.min(
-    Math.floor((width / gridYSize) - (4 * gridLineSize)),
-    Math.floor((height / gridXSize) - (4 * gridLineSize))
-  );
   const style = {
     width: `${size}px`,
     height: `${size}px`,
@@ -69,7 +64,7 @@ function getCell({ index, size, value, style, config }) {
     <th width={size} height={size} key={`head-${index}`} style={style}>
       {
         index > 0 && index <= gridXEnumUntil ?
-          <MapCreatorGridContent value={(index == 1 ? value : succ(value))} /> :
+          <MapCreatorGridContent size={size} value={(index == 1 ? value : succ(value))} /> :
           null
       }
     </th>

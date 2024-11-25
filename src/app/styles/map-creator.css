@@ -38,15 +38,30 @@ table.map-creator-grid {
   font-weight: bold;
   text-align: center;
   table-layout: fixed;
-  width: 100%;
   position: absolute;
   top: 0px;
   pointer-events: none;
 }
 
-table.map-creator-grid th, table.map-creator-grid td {
+table.map-creator-grid th,
+table.map-creator-grid td {
   overflow: hidden;
   box-sizing: content-box;
+}
+
+table.map-creator-grid .map-grid-element-container {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  line-height: 0;
+  position: relative;
+}
+
+table.map-creator-grid .map-grid-element-container .map-grid-element-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .map-creator-from-map-load-map-info-form {

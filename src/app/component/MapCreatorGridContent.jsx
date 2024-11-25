@@ -4,13 +4,18 @@
 function MapCreatorGridContent(props) {
 
   // Props
-  const { value } = props;
+  const { value, size } = props;
+
+  const style = {
+    width: `${size}px`,
+    height: `${size}px`,
+  };
 
   // Render
   return (
-    <span style={{ margin: "0px", padding: "0px", lineHeight: "0" }}>
-      {value}
-    </span>
+    <div className="map-grid-element-container" style={style}>
+      <span className="map-grid-element-content">{value}</span>
+    </div>
   );
 }
 

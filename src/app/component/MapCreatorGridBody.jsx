@@ -11,11 +11,11 @@ import MapCreatorGridContent from "./MapCreatorGridContent";
 function MapCreatorGridBody(props) {
 
   // Props
-  const { width, height, config } = props;
+  const { width, height, size, config } = props;
 
   // Render
   return (
-    <tbody>{getCells(width, height, config)}</tbody>
+    <tbody>{getCells(width, height, size, config)}</tbody>
   );
 
 }
@@ -23,7 +23,7 @@ function MapCreatorGridBody(props) {
 ///////////////////////////////////////////////////////////////
 // AUXILIAR METHODS
 ///////////////////////////////////////////////////////////////
-function getCells(width, height, config) {
+function getCells(width, height, size, config) {
 
   // Constants
   const {
@@ -32,10 +32,6 @@ function getCells(width, height, config) {
     gridLineSize,
     gridLineColor
   } = config;
-  const size = Math.min(
-    Math.floor((width / gridYSize) - (4 * gridLineSize)),
-    Math.floor((height / gridXSize) - (4 * gridLineSize))
-  );
   const style = {
     width: `${size}px`,
     height: `${size}px`,
@@ -68,7 +64,7 @@ function getCell({ indexX, indexY, size, value, style, config }) {
     <td width={size} height={size} key={`cell-${indexX}-${indexY}`} style={style}>
       {
         indexY == 0 && indexX < gridYEnumUntil ?
-          <MapCreatorGridContent value={value} /> :
+          <MapCreatorGridContent size={size} value={value} /> :
           null
       }
     </td>
