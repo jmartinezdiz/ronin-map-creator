@@ -5,7 +5,7 @@
 // STANDARD
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
-import { toPng } from 'html-to-image';
+import { toPng, toJpeg } from 'html-to-image';
 
 ///////////////////////////////////////////////////////////////
 // COMPONENT
@@ -27,7 +27,13 @@ function MapDownload(props) {
   };
 
   // Events
-  const onClickDownloadImage = function() {
+  const onClickDownloadJpgImage = function() {
+    toJpeg(mapRef.current, { cacheBust: false, quality: 0.90 }).then((url) => {
+      downloadFile({ name: `${t("mapDownload.imageName")}.jpg`, url });
+    });
+  };
+
+  const onClickDownloadPngImage = function() {
     toPng(mapRef.current, { cacheBust: false }).then((url) => {
       downloadFile({ name: `${t("mapDownload.imageName")}.png`, url });
     });
@@ -43,7 +49,8 @@ function MapDownload(props) {
   // Render
   return (
     <ButtonGroup>
-      <Button variant="success" onClick={onClickDownloadImage}>{t("mapDownload.downloadImage")}</Button>
+      <Button variant="success" onClick={onClickDownloadJpgImage}>{t("mapDownload.downloadJpgImage")}</Button>
+      <Button variant="success" onClick={onClickDownloadPngImage}>{t("mapDownload.downloadPngImage")}</Button>
       {getMapInfo &&
         <Button variant="primary" onClick={onClickDownloadInfo}>{t("mapDownload.saveInfo")}</Button>
       }

@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////
 
 // STANTARD
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Tabs,
   Tab,
@@ -11,6 +11,9 @@ import {
   Row,
 } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
+
+// MODELS
+import { OPTIONS, AVAILABLE_MAP_SIZES } from '../model/config';
 
 // COMPONENTS
 import MapCreatorConfigFormInput from "./MapCreatorConfigFormInput";
@@ -31,9 +34,39 @@ function MapCreatorConfigForm(props) {
   // Variables
   const { t } = useTranslation();
 
+  const getMapSize = function(width, height) {
+    for (const [key, value] of Object.entries(AVAILABLE_MAP_SIZES)) {
+      if (value.width == width && value.height == height) {
+        return key;
+      }
+    }
+    return OPTIONS.mapSize.default;
+  };
+
+  // Callbacks
+  useEffect(() => {
+    let mapSize = getMapSize(config.mapWidth, config.mapHeight);
+    if (config.mapSize != mapSize) {
+      onChangeOption("mapSize", mapSize);
+    }
+  }, [config.mapWidth, config.mapHeight]);
+
   // Events
+  const onChangeOptions = function(newOptions) {
+    onChange({ ...config, ...newOptions });
+  };
+
   const onChangeOption = function(name, value) {
-    onChange({ ...config, [name]: value });
+    onChangeOptions({ [name]: value });
+  };
+
+  const onChangeMapSize = function(name, value) {
+    let { width, height } = AVAILABLE_MAP_SIZES[value];
+    onChangeOptions({
+      [name]: value,
+      mapWidth: width || config.mapWidth,
+      mapHeight: height || config.mapHeight,
+    });
   };
 
   const onClickMapWidthA4HorizontalNotice = function(e) {
@@ -91,6 +124,7 @@ function MapCreatorConfigForm(props) {
         <Tab eventKey="map" title={t("mapCreatorConfigForm.map")}>
         <Container fluid>
           <Row>
+            <MapCreatorConfigFormInput config={config} name="mapSize" onChange={onChangeMapSize} />
             <MapCreatorConfigFormInput config={config} name="mapWidth" onChange={onChangeOption} notice={renderMapWidthNotice()} />
             <MapCreatorConfigFormInput config={config} name="mapHeight" onChange={onChangeOption} notice={renderMapHeightNotice()} />
             <MapCreatorConfigFormInput config={config} name="mapLayer" onChange={onChangeOption} />

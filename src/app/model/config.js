@@ -17,6 +17,20 @@ const AVAILABLE_FONTS = [
 ];
 const AVAILABLE_LAYERS = ["satellite", "street", "topographic"];
 
+const AVAILABLE_MAP_SIZES = {
+  none: { width: null, height: null },
+  A4_100_horizontal: { width: 1169, height: 827 },
+  A4_150_horizontal: { width: 1754, height: 1240 },
+  A4_200_horizontal: { width: 2339, height: 1653 },
+  A4_250_horizontal: { width: 2923, height: 2067 },
+  A4_300_horizontal: { width: 3508, height: 2480 },
+  A4_100_vertical: { width: 827, height: 1169 },
+  A4_150_vertical: { width: 1240, height: 1754 },
+  A4_200_vertical: { width: 1653, height: 2339 },
+  A4_250_vertical: { width: 2067, height: 2923 },
+  A4_300_vertical: { width: 2480, height: 3508 },
+};
+
 const greaterThanZero = function(value) {
   return value && value > 0;
 };
@@ -35,6 +49,7 @@ const OPTIONS = {
   logoBorderRadius: Option.newInteger({ default: 50, validators: [greaterThanZero] }),
   logoMarginTop: Option.newInteger({ default: 80, validators: [greaterThanZero] }),
   logoMarginRight: Option.newInteger({ default: 40, validators: [greaterThanZero] }),
+  mapSize: Option.newString({ default: "none", availableValues: Object.keys(AVAILABLE_MAP_SIZES), virtual: true }),
   mapWidth: Option.newInteger({ default: 1280, validators: [greaterThanZero] }),
   mapHeight: Option.newInteger({ default: 905, validators: [greaterThanZero] }),
   mapLayer: Option.newString({ default: "satellite", availableValues: AVAILABLE_LAYERS }),
@@ -80,7 +95,9 @@ class Config {
   toHash() {
     let hash = {};
     Object.keys(OPTIONS).forEach((x) => {
-      hash[x] = this[x];
+      if (OPTIONS[x] && !OPTIONS[x].isVirtual()) {
+        hash[x] = this[x];
+      }
     });
     return hash;
   }
@@ -91,4 +108,4 @@ class Config {
 // EXPORTS
 ///////////////////////////////////////////////////////////////
 export default Config;
-export { OPTIONS };
+export { OPTIONS, AVAILABLE_MAP_SIZES };

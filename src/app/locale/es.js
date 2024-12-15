@@ -48,7 +48,8 @@ let translations = {
   mapDownload: {
     imageName: "mapa",
     infoName: "mapa",
-    downloadImage: "Descargar imagen",
+    downloadJpgImage: "Descargar imagen jpg",
+    downloadPngImage: "Descargar imagen png",
     saveInfo: "Guardar mapa",
   },
   config: {
@@ -66,6 +67,7 @@ let translations = {
       logoBorderRadius: "Porcentage de redondez del logo",
       logoMarginTop: "Margen del logo por arriba (píxeles)",
       logoMarginRight: "Margen del logo por la derecha (píxeles)",
+      mapSize: "Tamaño del mapa predefido",
       mapWidth: "Ancho del mapa (píxeles)",
       mapHeight: "Alto del mapa (píxeles)",
       mapLayer: "Tipo de mapa",
@@ -115,6 +117,19 @@ let translations = {
         street: "Callejero",
         satellite: "Satélite",
         topographic: "Topográfico",
+      },
+      mapSize: {
+        none: "Ninguno seleccionado",
+        A4_100_horizontal: "A4 100 DPI Horizontal",
+        A4_150_horizontal: "A4 150 DPI Horizontal",
+        A4_200_horizontal: "A4 200 DPI Horizontal",
+        A4_250_horizontal: "A4 250 DPI Horizontal",
+        A4_300_horizontal: "A4 300 DPI Horizontal",
+        A4_100_vertical: "A4 100 DPI Vertical",
+        A4_150_vertical: "A4 150 DPI Vertical",
+        A4_200_vertical: "A4 200 DPI Vertical",
+        A4_250_vertical: "A4 250 DPI Vertical",
+        A4_300_vertical: "A4 300 DPI Vertical",
       },
     },
   }

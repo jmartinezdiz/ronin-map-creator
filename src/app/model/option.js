@@ -31,6 +31,7 @@ class Option {
     this.required = attrs.hasOwnProperty("required") ? attrs.required : true;
     this.availableValues = attrs.availableValues || [];
     this.validators = attrs.validators || [];
+    this.virtual = attrs.virtual || false;
   }
 
   ///////////////////////////////////////////////////////////////
@@ -54,6 +55,10 @@ class Option {
 
   isInteger() {
     return this.type == TYPES.integer;
+  }
+
+  isVirtual() {
+    return !!this.virtual;
   }
 
   isValid(value) {
